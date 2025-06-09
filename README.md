@@ -1,0 +1,1 @@
+echo "# MedScope" > README.md
