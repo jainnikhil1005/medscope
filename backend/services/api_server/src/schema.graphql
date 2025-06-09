@@ -1,0 +1,21 @@
+type Prescription {
+  id: ID!
+  rawText: String!
+  parsedDrugs: [String!]!
+}
+
+type InteractionResult {
+  prescription1Id: ID!
+  prescription2Id: ID!
+  status: String!
+  details: String
+}
+
+type Query {
+  getInteractionResult(p1: ID!, p2: ID!): InteractionResult
+}
+
+type Mutation {
+  uploadPrescription(file: Upload!): Prescription!
+  checkInteraction(p1: ID!, p2: ID!): InteractionResult!
+}
