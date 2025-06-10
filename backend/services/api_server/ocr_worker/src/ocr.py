@@ -8,5 +8,5 @@ def extract_text(image_path: str) -> str:
     return text
 
 if __name__ == "__main__":
-    image_path = sys.argv[1]
-    print(extract_text(image_path))
+    image_path1 = sys.argv[1]
+    print(extract_text(image_path1))
