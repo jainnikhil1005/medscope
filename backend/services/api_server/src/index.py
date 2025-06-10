@@ -21,7 +21,6 @@ app.mount("/graphql", GraphQL(schema, debug=True))
 
 @app.post("/upload_prescription")
 async def upload_prescription(file: UploadFile = File(...)):
-    # Save to disk or object store, then return ID
     contents = await file.read()
     # TODO: persist file, enqueue OCR job
     return {"success": True, "prescriptionId": "<new_id>"}
