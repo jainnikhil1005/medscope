@@ -8,3 +8,5 @@ class InteractionResult(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     prescription1_id = Column(Integer, ForeignKey("prescriptions.id"), nullable=False)
     prescription2_id = Column(Integer, ForeignKey("prescriptions.id"), nullable=False)
+    status = Column(String(32), nullable=False)
+    details = Column(Text)
