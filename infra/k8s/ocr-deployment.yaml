@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocr-worker-deployment
+  labels:
+    app: medscope-ocr
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: medscope-ocr
