@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-server-deployment
+  labels:
+    app: medscope-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: medscope-api
+  template:
+    metadata:
+      labels:
+        app: medscope-api
+    spec:
+      containers:
+        - name: api-server
+          image: your-dockerhub-user/medscope-api:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_URL
+              value: "mysql+pymysql://user:password@db-host/medscope"
+            - name: OCR_SERVICE_URL
+              value: "http://ocr-service:5000"
+            - name: PARSER_SERVICE_URL
+              value: "http://parser-service:6000"
