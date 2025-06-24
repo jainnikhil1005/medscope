@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  api-server:
+    build: ./services/api_server
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=mysql+pymysql://user:password@db:3306/medscope
+      - OCR_SERVICE_URL=http://ocr-worker:5000
+      - PARSER_SERVICE_URL=http://parser-service:6000
+    depends_on:
+      - db
+      - ocr-worker
+      - parser-service
+
+  ocr-worker:
+    build: ./services/ocr_worker
+    command: ["python", "src/ocr.py", "/data/input.png"]
+    volumes:
+      - input-data:/data
+
+  parser-service:
+    build: ./services/parser_service
+    volumes:
+      - ./services/parser_service/data:/app/data
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: medscope
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  input-data:
+  db-data:
