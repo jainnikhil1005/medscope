@@ -9,3 +9,18 @@ spec:
   selector:
     matchLabels:
       app: medscope-ocr
+  template:
+    metadata:
+      labels:
+        app: medscope-ocr
+    spec:
+      containers:
+        - name: ocr-worker
+          image: your-dockerhub-user/medscope-ocr:latest
+          args: ["ocr.py", "/data/input.png"]
+          volumeMounts:
+            - name: input-volume
+              mountPath: /data
+      volumes:
+        - name: input-volume
+          emptyDir: {}
