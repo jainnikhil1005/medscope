@@ -13,3 +13,15 @@ const mutation = graphql`
   }
 `;
 
+export default function useUpload() {
+    const commit = (file1, file2, callback) => {
+      commitMutation(RelayEnvironment, {
+        mutation,
+        variables: { p1: file1, p2: file2 },
+        onCompleted: data => callback(data.checkInteraction),
+        onError: err => console.error(err),
+      });
+    };
+  
+    return { commit };
+  }
