@@ -13,3 +13,13 @@ export default function FileUpload({ setLoading, setResult }) {
       setLoading(false);
     });
   };
+
+  return (
+    <div>
+      <input type="file" onChange={onChange} multiple />
+      <button onClick={onSubmit} disabled={files.length < 2}>
+        Check Interaction
+      </button>
+    </div>
+  );
+}
